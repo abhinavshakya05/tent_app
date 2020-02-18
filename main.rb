@@ -18,39 +18,28 @@ while true
   user_response = gets.chomp
   user_response = user_response.to_i if !user_response.nil? && !user_response.empty?
   default_msg = 'Initialize first by pressing 0'
-  case user_response
-    when 0
-      booking=Booking.new
-      puts 'Initializing Tent House...'    
-      puts 'Tent House Initialized.'
-    when 1
-      if booking!=nil
-          booking.show_available_options 
-      else    
-          puts default_msg    
-      end
-    when 2
-      if booking!=nil
-          booking.new_booking
+  
+  if booking!=nil || user_response == 0
+    case user_response
+      when 0
+        booking=Booking.new
+        puts 'Initializing Tent House...'    
+        puts 'Tent House Initialized.'
+      when 1
+        booking.show_available_options
+      when 2
+        booking.new_booking
+      when 3
+        booking.return_items
+      when 4
+        booking.show_all_booking_transactions
+      when 9
+        puts "Thankyou for choosing Tent House Rental,Have a great day!"
+        exit
       else
-          puts default_msg
-      end    
-    when 3
-      if booking!=nil
-          booking.return_items
-      else
-          puts default_msg
-      end    
-    when 4
-      if booking!=nil
-          booking.show_all_booking_transactions
-      else
-          puts default_msg
-      end    
-    when 9
-      puts "Thankyou for choosing Tent House Rental,Have a great day!"
-      exit
-    else
-      puts "Choose a correct option."
-    end 
+        puts "Choose a correct option."
+      end 
+  else
+      puts default_msg
+  end    
 end
